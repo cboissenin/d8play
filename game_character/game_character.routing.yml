@@ -1,0 +1,23 @@
+#game_character.add:
+#  path: '/character/add/'
+#  defaults:
+#    _controller: '\Drupal\game_character\Controller\GameCharacterController::add'
+#    _title: 'Add new character'
+#  #_title_callback: '\Drupal\node\Controller\NodeController::addPageTitle'
+#  requirements:
+#    _access: 'TRUE'
+
+    #_node_add_access: 'node:character'
+#  options:
+#    _node_operation_route: TRUE
+#    parameters:
+#      node_type:
+#        with_config_overrides: TRUE
+
+game_character.add:
+  path: 'character/add'
+  defaults:
+    _controller: '\Drupal\game_character\Controller\GameCharacterController::add'
+    _title: 'Add new Character'
+  requirements:
+    _access: 'TRUE'

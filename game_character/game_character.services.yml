@@ -1,0 +1,5 @@
+services:
+  game_character.game_config:
+    class: Drupal\game_character\GameConfigService
+  game_character.character_info:
+    class: Drupal\game_character\CharacterInfoService

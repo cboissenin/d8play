@@ -1,0 +1,68 @@
+<?php
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function game_character_form_node_character_form_alter(&$form, &$form_state) {
+  $form['field_level']['#access'] = $form['field_experience']['#access'] = FALSE;
+}
+
+
+/**
+ * Implements hook_node_submit().
+ */
+function game_character_node_submit(NodeInterface $node, $form, FormStateInterface $form_state) {
+  kint('hook_node_submit');
+  kint($node);
+}
+
+/**
+ * Implements hook_entity_insert().
+ */
+function game_character_entity_insert(Drupal\Core\Entity\EntityInterface $entity) {
+  if ($entity instanceof \Drupal\node\NodeInterface && $entity->bundle() == 'character') {
+    $owner = $entity->getOwner();
+    $owner->field_ref_character->setValue($entity->id());
+    $owner->save();
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function game_character_theme() {
+  $theme['character_info'] = array(
+    'template' => 'character_info',
+    'variables' => array(
+      'character' => array(),
+    ),
+  );
+
+  return $theme;
+}
+
+function game_character_info_pre_render($build) {
+  $character_info_service = \Drupal::service('game_character.character_info');
+  $build['#character'] = $character_info_service->getInfos();
+  dpm('pre render');
+  dpm($build);
+  return $build;
+}
+
+function game_character_cron() {
+  \Drupal::logger('cron')->notice('hook_cron run OK');
+}
+
+
+
+//function game_character_job_scheduler_info() {
+//  $schedulers = array();
+//  $schedulers['build_item'] = array(
+//    'worker callback' => 'game_character_build_item',
+//  );
+//  return $schedulers;
+//}
+//
+//function game_character_build_item($job) {
+//  dpm('build item callback');
+//}

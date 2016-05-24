@@ -1,0 +1,5 @@
+name: Entity Character
+type: module
+description: 'Provides Character entity.'
+package: Games
+core: 8.x

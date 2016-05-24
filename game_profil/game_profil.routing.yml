@@ -1,0 +1,7 @@
+game_profil.edit:
+  path: 'profil/edit'
+  defaults:
+    _controller: '\Drupal\game_profil\Controller\GameProfilController::edit'
+    _title: 'Edit profil'
+  requirements:
+    _access: 'TRUE'

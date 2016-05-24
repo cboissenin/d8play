@@ -1,0 +1,49 @@
+# This file brings everything together. Very nifty!
+
+# Route name can be used in sevaral place (links, redirects, local actions etc.)
+entity.entity_character.canonical:
+  path: '/entity_character/{character}'
+  defaults:
+  # Calls the view controller, defined in the annotation of the contact entity
+    _entity_view: 'entity_character'
+    _title: 'Character Content'
+  requirements:
+  # Calls the access controller of the entity, $operation 'view'
+    _entity_access: 'entity_character.view'
+
+entity.entity_character.collection:
+  path: '/entity_character/list'
+  defaults:
+  # Calls the list controller, defined in the annotation of the contact entity.
+    _entity_list: 'entity_character'
+    _title: 'Character List'
+  requirements:
+  # Checks for permission directly.
+    _permission: 'view character entity'
+
+entity_character.character_add:
+  path: '/entity_character/add'
+  defaults:
+  # Calls the form.add controller, defined in the contact entity.
+    _entity_form: entity_character.add
+    _title: 'Add Character'
+  requirements:
+    _entity_create_access: 'entity_character.create'
+
+entity.entity_character.edit_form:
+  path: '/entity_character/{character}/edit'
+  defaults:
+  # Calls the form.edit controller, defined in the contact entity.
+    _entity_form: entity_character.edit
+    _title: 'Edit Character'
+  requirements:
+    _entity_access: 'entity_character.edit'
+
+entity.entity_character.delete_form:
+  path: '/entity_character/{character}/delete'
+  defaults:
+    # Calls the form.delete controller, defined in the contact entity.
+    _entity_form: entity_character.delete
+    _title: 'Delete Character'
+  requirements:
+    _entity_access: 'entity_character.delete'
